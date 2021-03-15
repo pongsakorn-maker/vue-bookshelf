@@ -2,18 +2,19 @@
   <div>
         <form >
           <v-text-field
-            v-model="form.title"
-            label="Title"
+            v-model="form.Title"
+            label="title"
             required
           ></v-text-field>
           <v-text-field
-            v-model="form.author"
-            label="Author"
+            v-model="form.Author"
+            label="author"
             required
           ></v-text-field>
           <v-text-field
-            v-model="form.rating"
-            label="Rating"
+            v-model="form.Rating"
+            label="rating"
+            type="number"
             required
           ></v-text-field>
           <v-btn class="mr-4" @click="submitForm"> submit </v-btn>
@@ -24,25 +25,23 @@
 
 
 <script>
-import {HTTP} from "@/axios.js";
+import {BookAPI} from '../axios';
 
 export default {
   name: "HelloWorld",
   data() {
     return {
       form: {
-        title: "",
-        author: "",
-        rating: "",
+        Title: "",
+        Author: "",
+        Rating: 0,
       },
     };
   },
   methods: {
     submitForm() {
-      console.log(this.form)
-
-      HTTP
-        .post("/book", this.form)
+      // console.log(this.form)
+      BookAPI.createBook(this.form)
         .then((res) => {
           //Perform Success Action
           console.log(res);
